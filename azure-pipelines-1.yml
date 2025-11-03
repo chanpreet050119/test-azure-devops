@@ -8,6 +8,10 @@ steps:
 - script: echo "This is a test artifact" > test-artifact.txt
   displayName: 'Create Test Artifact'
 
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: $(System.DefaultWorkingDirectory)/bin/TestArtifact
+    artifactName: TestArtifact
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)/test-artifact.txt'
