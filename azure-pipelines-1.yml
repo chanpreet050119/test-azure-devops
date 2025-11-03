@@ -10,8 +10,10 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: $(System.DefaultWorkingDirectory)/bin/TestArtifact
-    artifactName: TestArtifact
+    targetPath: '$(Pipeline.Workspace)/drop' # Or the path to your build output
+    artifact: 'TestArtifact' # A descriptive name for your artifact
+    publishLocation: 'Container' # Or 'FilePath' if publishing to a file share
+  
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)/test-artifact.txt'
