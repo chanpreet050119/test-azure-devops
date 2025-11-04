@@ -2,16 +2,16 @@ trigger:
 - main
 
 pool:
-  name: 'Default'          # pool name (Default or custom)
-  demands:                 # optional — ensure it runs on a specific agent
+  name: 'Default'
+  demands:
   - agent.name -equals DESKTOP-BKN0CUK
 
 steps:
-- script: echo "This is a test artifact" > test-artifact.txt
-  displayName: 'Create Test Artifact'
+- script: echo "Hello from $(Agent.Name)" > artifact.txt
+  displayName: 'Create simple artifact file'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/test-artifact.txt'
-    ArtifactName: 'test-artifact'
+    PathtoPublish: 'artifact.txt'
+    ArtifactName: 'simple-artifact'
     publishLocation: 'Container'
