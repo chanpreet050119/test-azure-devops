@@ -2,7 +2,9 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Default'          # pool name (Default or custom)
+  demands:                 # optional — ensure it runs on a specific agent
+  - agent.name -equals DESKTOP-BKN0CUK
 
 steps:
 - script: echo "This is a test artifact" > test-artifact.txt
