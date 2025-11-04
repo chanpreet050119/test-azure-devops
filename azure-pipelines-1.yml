@@ -7,6 +7,8 @@ pool:
   - agent.name -equals DESKTOP-BKN0CUK
 
 steps:
+- checkout: self
+
 - script: echo "Hello from $(Agent.Name)" > artifact.txt
   displayName: 'Create simple artifact file'
 
