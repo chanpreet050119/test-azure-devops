@@ -1,5 +1,5 @@
 trigger:
-- main
+- azure-pipelines-test
 
 pool:
   name: 'Default'
@@ -12,6 +12,23 @@ steps:
 - script: echo "Hello from $(Agent.Name)" > artifact.txt
   displayName: 'Create simple artifact file'
 
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/TestArtifact'
+    artifact: 'TestArtifact'
+    publishLocation: 'pipeline'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/drop' # Or the path to your build output
+    artifact: 'TestArtifact' # A descriptive name for your artifact
+    publishLocation: 'Container' # Or 'FilePath' if publishing to a file share
+  
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/TestArtifact1'
+    artifact: 'TestArtifact1'
+    publishLocation: 'pipeline'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'artifact.txt'
